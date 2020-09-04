@@ -46,7 +46,7 @@ public class SlingShotMouse : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         firstMiddlePoint = MiddlePoint.transform.position;
         BoxCollider col = transform.gameObject.AddComponent<BoxCollider>();
-        col.size = new Vector3(8, 0.15f, 0.15f);
+        col.size = new Vector3(8, 0.25f, 0.25f);
         float lineLength = Vector3.Distance(StartPoint.transform.position, EndPoint.transform.position); // length of line
         Vector3 midPoint = (StartPoint.transform.position + EndPoint.transform.position) / 2;
     }

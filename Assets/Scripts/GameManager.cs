@@ -28,6 +28,7 @@ public class GameManager : MonoBehaviour
     }
     public void GameOver()
     {
+        
         GameOverUI.SetActive(true);
         Time.timeScale = 0;
     }
@@ -50,4 +51,5 @@ public class GameManager : MonoBehaviour
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
+    
 }
