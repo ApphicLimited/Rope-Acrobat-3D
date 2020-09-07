@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
     public float RestartDelay = 1f;
     public int currentLevel;
     public GameObject NextLevelBtn;
+    
     public void CompleteLevel()
     {
         CompleteLevelUI.SetActive(true);
@@ -41,6 +42,7 @@ public class GameManager : MonoBehaviour
             Invoke("Restart", RestartDelay);
         }
     }
+
     public void seviyeAtlama()
     {
         currentLevel++;
