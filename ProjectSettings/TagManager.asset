@@ -8,6 +8,8 @@ TagManager:
   - FxTemporaire
   - Ground
   - Engel
+  - sonYer
+  - PuanTablo
   layers:
   - Default
   - TransparentFX

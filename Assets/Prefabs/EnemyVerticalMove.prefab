@@ -28,7 +28,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8818768441734904558}
   m_LocalRotation: {x: 0.50248086, y: -0.50248086, z: 0.49750674, w: 0.49750674}
-  m_LocalPosition: {x: -2.96, y: 6.42, z: 1}
+  m_LocalPosition: {x: -2.96, y: 22.5, z: 1.2}
   m_LocalScale: {x: 4, y: 0.91211, z: -0.2388566}
   m_Children: []
   m_Father: {fileID: 0}
@@ -110,7 +110,7 @@ MonoBehaviour:
   speed: 2
   MoveRight: 0
   righlimit: -3
-  leftlimit: 3
+  leftlimit: 10
   gameManager: {fileID: 4832720856983842747, guid: f3f78978986e3f546843d80a72e93ddc,
     type: 3}
   GameOverUI: {fileID: 3602250354672945652, guid: e3f7ad9f1c0111442a8e49eac048b3b5,

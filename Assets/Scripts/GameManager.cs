@@ -13,7 +13,8 @@ public class GameManager : MonoBehaviour
     public float RestartDelay = 1f;
     public int currentLevel;
     public GameObject NextLevelBtn;
-    
+    public Animation anim;
+    public AnimationClip[] clips;
     public void CompleteLevel()
     {
         CompleteLevelUI.SetActive(true);

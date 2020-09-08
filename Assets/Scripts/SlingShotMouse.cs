@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class SlingShotMouse : MonoBehaviour
 {
-
+    public GameManager Gm;
     public Transform StartPoint;
     public Transform EndPoint;
     public Transform MiddlePoint;
+    
+    
 
     private LineRenderer lineRenderer;
     private List<RopeSegment> ropeSegments = new List<RopeSegment>();
@@ -29,6 +31,7 @@ public class SlingShotMouse : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        Gm = FindObjectOfType<GameManager>();
         this.lineRenderer = this.GetComponent<LineRenderer>();
         Vector3 ropeStartPoint = StartPoint.position;
 
@@ -66,7 +69,13 @@ public class SlingShotMouse : MonoBehaviour
             {
                 if (hit.transform == transform)
                 {
+
                     this.moveToMouse = true;
+                    Gm.anim.Stop();
+                    Gm.anim.clip = Gm.clips[0];
+                    Gm.anim.Play();
+
+
                 }
             }
         }
@@ -115,7 +124,7 @@ public class SlingShotMouse : MonoBehaviour
             this.indexMousePos = (int)(this.segmentLength * ratio);
         }
 
-
+      
     }
 
     IEnumerator ActivateCollider()
@@ -130,7 +139,11 @@ public class SlingShotMouse : MonoBehaviour
         GameObject.Find("Player").GetComponent<Rigidbody>().useGravity = true;
         StartCoroutine(ActivateCollider());
         GameObject.Find("Player").GetComponent<Rigidbody>().AddForce(force, ForceMode.Impulse);
+
         GameObject.Find("MainCamera").GetComponent<SmoothFollow>().enabled = true;
+        Gm.anim.Stop();
+        Gm.anim.clip = Gm.clips[1];
+        Gm.anim.Play();
     }
 
     private void FixedUpdate()
@@ -250,11 +263,24 @@ public class SlingShotMouse : MonoBehaviour
 
     private void OnCollisionEnter(Collision other)
     {
+        print("sa   "+transform.name+  "     "+other.transform.name);
+        
         if (other.transform.name == "Player")
         {
             GameObject.Find("Player").GetComponent<Rigidbody>().velocity = Vector3.zero;
             GameObject.Find("Player").GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
             other.transform.position = MiddlePoint.position;
+
+            Gm.anim.clip = Gm.clips[3];
+            Gm.anim.Play();
+
+        }
+        else if(other.collider.tag == "Player")
+        {
+           
+            Gm.anim.Stop();
+            Gm.anim.clip = Gm.clips[4];
+            Gm.anim.Play();
         }
     }
 }
