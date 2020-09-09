@@ -44,7 +44,7 @@ public class CoinManager : MonoBehaviour
     IEnumerator Text()
     {
         text.SetActive(true);
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(1f);
         text.SetActive(false);
     }
    
@@ -54,7 +54,6 @@ public class CoinManager : MonoBehaviour
         if(ScoreValue % 3 == 0)
         {
             StartCoroutine(Text());
-            Text();
         }
     }
 }

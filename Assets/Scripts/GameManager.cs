@@ -15,11 +15,14 @@ public class GameManager : MonoBehaviour
     public GameObject NextLevelBtn;
     public Animation anim;
     public AnimationClip[] clips;
+    public GameObject confetti;
+
     public void CompleteLevel()
     {
         CompleteLevelUI.SetActive(true);
         Time.timeScale = 0;
         PlayerPrefs.SetInt("Level", currentLevel);
+       
     }
     private void Start()
     {
