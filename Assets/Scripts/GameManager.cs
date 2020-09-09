@@ -22,7 +22,7 @@ public class GameManager : MonoBehaviour
         CompleteLevelUI.SetActive(true);
         Time.timeScale = 0;
         PlayerPrefs.SetInt("Level", currentLevel);
-        confetti.SetActive(true);
+       
     }
     private void Start()
     {
