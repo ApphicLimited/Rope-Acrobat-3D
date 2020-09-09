@@ -88,14 +88,14 @@ public class PlayerScript : MonoBehaviour
 
     }
     private bool jumpControl;
-    private bool animationControl;
+    public  bool animationControl;
     IEnumerator paraschutWait()
     {
         yield return new WaitForSeconds(2f);
         Time.timeScale = 0;
     }
-  public  GameObject left, right;
-    public void paractueBut()
+
+    public void paractueButton()
     {
         if (isReachedJumpingPoint==true)
         {
@@ -127,7 +127,7 @@ public class PlayerScript : MonoBehaviour
         Gm.anim.Stop();
         Gm.anim.clip = Gm.clips[6];
         Gm.anim.Play();
-        animationControl = true;
+       animationControl = true;
        
     }
 }
