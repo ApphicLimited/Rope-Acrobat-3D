@@ -140,7 +140,7 @@ public class SlingShotMouse : MonoBehaviour
         StartCoroutine(ActivateCollider());
         GameObject.Find("Player").GetComponent<Rigidbody>().AddForce(force, ForceMode.Impulse);
 
-        GameObject.Find("MainCamera").GetComponent<SmoothFollow>().enabled = true;
+      GameObject.Find("MainCamera").GetComponent<SmoothFollow>().enabled = true;
         Gm.anim.Stop();
         Gm.anim.clip = Gm.clips[1];
         Gm.anim.Play();

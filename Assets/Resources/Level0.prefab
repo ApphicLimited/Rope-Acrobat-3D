@@ -2176,6 +2176,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: OrjinalIp (7)
       objectReference: {fileID: 0}
+    - target: {fileID: 217103133946565427, guid: 726a3f4ef00ded645940810061ee5ca1,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3419357866234668864, guid: 726a3f4ef00ded645940810061ee5ca1,
         type: 3}
       propertyPath: m_LocalPosition.x

@@ -7,25 +7,36 @@ public class SonYerdeKosAnimasyon : MonoBehaviour
     public GameManager Gm;
      
     public Rigidbody rb;
-    public float forwardForce = 2000f;
+    
+    Vector2 currentSwipe;
+    Vector2 firstPressPos;
+    Vector2 secondPressPos;
+    public float NereyeKadar;
+    public string Nerede;
+    public int slot;
     private void Start()
     {
         Gm= FindObjectOfType<GameManager>();
     }
-    private void OnCollisionEnter(Collision collision)
+    private void Update()
     {
-        print("sa    "+ collision.collider.tag);
-        if (collision.collider.tag == "Player")
+        getir();
+
+        void OnCollisionEnter(Collision collision)
         {
-            //rb.AddForce(0, 0, forwardForce * Time.deltaTime);
-            Gm.anim.Stop();
-            Gm.anim.clip = Gm.clips[4];
-            Gm.anim.Play();
-            collision.transform.position = Vector3.Lerp(collision.transform.position, new Vector3(0, 16f, 1.05f), 3f);
-            rb.AddForce(0, 0, 200 * Time.deltaTime);
-        }
-    }
-    
+            print("sa    " + collision.collider.tag);
+            if (collision.collider.tag == "Player")
+            {
+
+                Gm.anim.Stop();
+                Gm.anim.clip = Gm.clips[4];
+                Gm.anim.Play();
+                collision.transform.position = Vector3.Lerp(collision.transform.position, new Vector3(0, 16f, 1.05f), 3f);
+                rb.AddForce(0, 0, 200 * Time.deltaTime);
+                
+            }
+        } }
+
     /* private void on(Collider collision)
      {
      FindObjectOfType<GameManager>();
@@ -42,6 +53,71 @@ public class SonYerdeKosAnimasyon : MonoBehaviour
          }
      }*/
 
+    IEnumerator OrtayaAl()
+    {
+        yield return new WaitForSeconds(.6f);
+        Nerede = "ortada";
+        NereyeKadar = 0;
+    }
+    void getir()
+    {
+
+        if (Input.GetMouseButton(0))
+        {
+            if (Input.mousePosition.x > Screen.width / 2)
+            {
+                print("Sag tarafa tiklandi");
+
+            }
+            else
+            {
+                print("Sol tarafa tiklandi");
+            }
+            
+        }
+        /*
+        if (Input.GetMouseButtonDown(0))
+        {
+            firstPressPos = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
+        }
+        if (Input.GetMouseButtonUp(0))
+        {
+            secondPressPos = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
+
+            currentSwipe = new Vector2(secondPressPos.x - firstPressPos.x, secondPressPos.y - firstPressPos.y);
+
+            currentSwipe.Normalize();
+
+          
+           
+            if (currentSwipe.x < 0 && currentSwipe.y > -0.5f && currentSwipe.y < 0.5f)
+            {
+                Debug.Log("left swipe");
+
+                if (slot > 1 && Nerede == "ortada")
+                {
+                    NereyeKadar = -27;
+                    StartCoroutine(OrtayaAl());
+                    slot -= 1;
+                    Nerede = "yan";
+
+                }
+
+            }
+            if (currentSwipe.x > 0 && currentSwipe.y > -0.5f && currentSwipe.y < 0.5f)
+            {
+                if (slot < 4 && Nerede == "ortada")
+                {
+                    NereyeKadar = 27;
+                    StartCoroutine(OrtayaAl());
+                    slot += 1;
+                    Nerede = "yan";
+
+                    Debug.Log("right swipe");
+                }
+            }
+        }*/
+    }
 
 
 }
