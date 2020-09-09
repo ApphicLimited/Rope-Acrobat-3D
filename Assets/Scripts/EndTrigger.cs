@@ -37,6 +37,8 @@ public class EndTrigger : MonoBehaviour
         if(collision.name == "Player")
         {
             checkit = true;
+          
+
         }
     }
 
