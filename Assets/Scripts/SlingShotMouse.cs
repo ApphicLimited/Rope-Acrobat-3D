@@ -50,7 +50,7 @@ public class SlingShotMouse : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         firstMiddlePoint = MiddlePoint.transform.position;
         BoxCollider col = transform.gameObject.AddComponent<BoxCollider>();
-        col.size = new Vector3(8, 0.3f, 0.3f);
+        col.size = new Vector3(8, 0.5f, 0.6f);
         float lineLength = Vector3.Distance(StartPoint.transform.position, EndPoint.transform.position); // length of line
         Vector3 midPoint = (StartPoint.transform.position + EndPoint.transform.position) / 2;
     }
@@ -118,7 +118,6 @@ public class SlingShotMouse : MonoBehaviour
         float xEnd = EndPoint.position.x;
         this.mousePositionWorld = Camera.main.ScreenToWorldPoint(new Vector3(screenMousePos.x, screenMousePos.y, 10));
         float currX = this.mousePositionWorld.x;
-
         ratio = (currX - xStart) / (xEnd - xStart);
         if (ratio > 0)
         {
@@ -204,7 +203,7 @@ public class SlingShotMouse : MonoBehaviour
             {
                 changeDir = (secondSeg.posNow - firstSeg.posNow).normalized;
             }
-
+           
 
             Vector3 changeAmount = changeDir * error;
             changeAmount2 = new Vector3(0, changeAmount.x / 2.5f, changeAmount.z * -1.3f);

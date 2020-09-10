@@ -45,7 +45,7 @@ public class PlayerScript : MonoBehaviour
             {
                 animation.Play("PlayerKos");
                 GameObject.Find("CameraPosition").transform.eulerAngles = new Vector3(0, 90, 0);
-                transform.DORotate(new Vector3(0, 0, 0), 0.5f);
+                transform.DORotate(new Vector3(0, 180, 0), 0.5f);
                 transform.DOMove(JumpingPoint.position, 2.5f);
             }
             else
