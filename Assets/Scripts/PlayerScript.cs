@@ -17,7 +17,7 @@ public class PlayerScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+       // PlayerPrefs.DeleteAll();
 
         Gm = FindObjectOfType<GameManager>();
 
@@ -30,6 +30,7 @@ public class PlayerScript : MonoBehaviour
 
     IEnumerator JumpingPointSet()
     {
+      
         yield return new WaitForSeconds(2);
         JumpingPoint = GameObject.Find("JumpingPoint").transform;
         StartingPoint = GameObject.Find("StartingPoint").transform;
@@ -51,11 +52,11 @@ public class PlayerScript : MonoBehaviour
             {
                 isReachedJumpingPoint = true;
                 Physics.gravity = new Vector3(0, -1, 0);
-                gameObject.GetComponent<Rigidbody>().isKinematic = false;
+               gameObject.GetComponent<Rigidbody>().isKinematic = false;
                 GetComponent<Rigidbody>().AddForce(new Vector3(7.5f, 7.5f, 0), ForceMode.Impulse);
-
+                jumpControl = true;
                 Gm.anim.clip = Gm.clips[5];
-                Gm.anim.Play();
+              Gm.anim.Play();
 
                 StartCoroutine(OpenParachute());
             }
@@ -64,7 +65,7 @@ public class PlayerScript : MonoBehaviour
 
     IEnumerator OpenParachute()
     {
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(.5f);
         Parachute.SetActive(true);
         GameObject.Find("MainCamera").GetComponent<SmoothFollow>().distance = 20;
         GetComponent<TrailRenderer>().enabled = false;
@@ -75,23 +76,25 @@ public class PlayerScript : MonoBehaviour
     int x=10;
     private void FixedUpdate()
     {
-        if (jumpControl == true && animationControl!=true)
+        if (jumpControl == true)
         {
-            if (Input.mousePosition.x > screenCenterX)
+            if (Input.GetMouseButton(0))
             {
-                // Debug.Log("Left");
 
-                //   this.gameObject.GetComponent<RigidBody>()=AddForce(0, 0, 1);
-                this.gameObject.GetComponent<Rigidbody>().AddForce(0, 0, -5*Time.deltaTime,ForceMode.Impulse);
-            }
-            else if (Input.mousePosition.x < screenCenterX)
-            {
-                // Debug.Log("Right");
+                if (Input.mousePosition.x > Screen.width / 2)
+                {
+                    GetComponent<Rigidbody>().AddForce(new Vector3(0, 0, .5f), ForceMode.Impulse);
 
-                this.gameObject.GetComponent<Rigidbody>().AddForce(0, 0, 5*Time.deltaTime, ForceMode.Impulse);
+                }
+                else
+                {
+                    GetComponent<Rigidbody>().AddForce(new Vector3(0, 0, -.5f), ForceMode.Impulse);
+                }
+
+
             }
+
         }
-
     }
     private bool jumpControl;
     public  bool animationControl;
@@ -105,40 +108,11 @@ public class PlayerScript : MonoBehaviour
     {
       
     }
- 
+
+
+    private bool planeControl=true;
+
   
-
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.tag == "PuanTablo")
-        {
-            Gm.anim.Stop();
-            Gm.anim.clip = Gm.clips[3];
-            Gm.anim.Play();
-            Invoke("Gulme", 2f);
-            if (other.name == "PuanGroundKırmızı")
-            {
-
-            }
-            else if (other.name == "PuanGroundPembe")
-            {
-
-            }
-            else if (other.name == "PuanGroundMor")
-            {
-
-            }
-            else if (other.name == "PuanGroundTurkuaz")
-            {
-
-            }
-            else if (other.name == "PuanGroundYesil")
-            {
-
-            }
-        }
-    }
 
 
     public void Gulme()

@@ -29,7 +29,7 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 1;
         currentLevel = PlayerPrefs.GetInt("Level");
         
-        Instantiate(Resources.Load("Level" + currentLevel), new Vector3(0, 0, 0), Quaternion.identity);
+    Instantiate(Resources.Load("Level" + currentLevel), new Vector3(0, 0, 0), Quaternion.identity);
     }
     public void GameOver()
     {
@@ -49,6 +49,7 @@ public class GameManager : MonoBehaviour
 
     public void seviyeAtlama()
     {
+       
         currentLevel++;
         PlayerPrefs.SetInt("Level", currentLevel);
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);

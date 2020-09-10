@@ -59,20 +59,26 @@ public class SonYerdeKosAnimasyon : MonoBehaviour
         Nerede = "ortada";
         NereyeKadar = 0;
     }
+    PlayerScript ps = new PlayerScript();
     void getir()
     {
 
-        if (Input.GetMouseButton(0))
+     /*   if (Input.GetMouseButton(0))
         {
-            if (Input.mousePosition.x > Screen.width / 2)
+            if (ps.JumpingPoint)
             {
-                print("Sag tarafa tiklandi");
+                if (Input.mousePosition.x > Screen.width / 2)
+                {
+                    GetComponent<Rigidbody>().AddForce(new Vector3(0, 0, .5f), ForceMode.Impulse);
 
-            }
-            else
-            {
-                print("Sol tarafa tiklandi");
-            }
+                }
+                else
+                {
+                    GetComponent<Rigidbody>().AddForce(new Vector3(0, 0, -.5f), ForceMode.Impulse);
+                }
+
+            }    */
+           
             
         }
         /*
@@ -120,4 +126,4 @@ public class SonYerdeKosAnimasyon : MonoBehaviour
     }
 
 
-}
+
