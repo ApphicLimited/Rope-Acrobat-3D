@@ -65,7 +65,7 @@ public class PlayerScript : MonoBehaviour
 
     IEnumerator OpenParachute()
     {
-        yield return new WaitForSeconds(.5f);
+        yield return new WaitForSeconds(2.5f);
         Parachute.SetActive(true);
         GameObject.Find("MainCamera").GetComponent<SmoothFollow>().distance = 20;
         GetComponent<TrailRenderer>().enabled = false;
