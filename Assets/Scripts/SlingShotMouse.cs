@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class SlingShotMouse : MonoBehaviour
 {
@@ -8,7 +9,7 @@ public class SlingShotMouse : MonoBehaviour
     public Transform StartPoint;
     public Transform EndPoint;
     public Transform MiddlePoint;
-    
+    public GameObject FallPrefab;
     
 
     private LineRenderer lineRenderer;
@@ -49,7 +50,7 @@ public class SlingShotMouse : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         firstMiddlePoint = MiddlePoint.transform.position;
         BoxCollider col = transform.gameObject.AddComponent<BoxCollider>();
-        col.size = new Vector3(8, 0.25f, 0.25f);
+        col.size = new Vector3(8, 0.3f, 0.3f);
         float lineLength = Vector3.Distance(StartPoint.transform.position, EndPoint.transform.position); // length of line
         Vector3 midPoint = (StartPoint.transform.position + EndPoint.transform.position) / 2;
     }
@@ -269,10 +270,17 @@ public class SlingShotMouse : MonoBehaviour
         {
             GameObject.Find("Player").GetComponent<Rigidbody>().velocity = Vector3.zero;
             GameObject.Find("Player").GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
-            other.transform.position = MiddlePoint.position;
 
-            Gm.anim.clip = Gm.clips[3];
+            other.transform.DOMove(MiddlePoint.position, 0.5f);
+
+
+            Instantiate(FallPrefab, MiddlePoint.position, Quaternion.identity);
+
+
+
+            Gm.anim.clip = Gm.clips[2];
             Gm.anim.Play();
+            Gm.anim.PlayQueued("IpteBekleme");
 
         }
         else if(other.collider.tag == "Player")

@@ -7,6 +7,7 @@ public class EndTrigger : MonoBehaviour
     public GameManager gameManager;
     public Transform player;
     public bool checkit = false;
+    public bool enteredOnce = false;
     private void Start()
     {
         gameManager = FindObjectOfType<GameManager>();
@@ -36,7 +37,12 @@ public class EndTrigger : MonoBehaviour
     {
         if(collision.name == "Player")
         {
-            checkit = true;
+            if(enteredOnce == false)
+            {
+                enteredOnce = true;
+                checkit = true;
+
+            }
           
 
         }

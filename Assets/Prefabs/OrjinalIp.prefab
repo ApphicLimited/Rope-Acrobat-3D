@@ -148,6 +148,7 @@ MonoBehaviour:
   StartPoint: {fileID: 9036208659724739964}
   EndPoint: {fileID: 5874781687083962444}
   MiddlePoint: {fileID: 6084653722888698376}
+  FallPrefab: {fileID: 100004, guid: fb7b0526ade434043b350a180d741cf3, type: 3}
   firstMiddlePoint: {x: 0, y: 0, z: 0}
 --- !u!1 &983871628433036018
 GameObject:
@@ -269,7 +270,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2795863176764773153}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2.41, y: -0.481, z: 0}
+  m_LocalPosition: {x: 2.41, y: 0, z: 0}
   m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_Children: []
   m_Father: {fileID: 3419357866234668864}

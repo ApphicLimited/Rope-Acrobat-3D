@@ -12,7 +12,7 @@ public class PlayerScript : MonoBehaviour
     public Transform StartingPoint;
     public Animation animation;
     public GameObject cube;
-    public GameObject parashut;
+    public GameObject Parachute;
     private float screenCenterX;
     // Start is called before the first frame update
     void Start()
@@ -43,29 +43,35 @@ public class PlayerScript : MonoBehaviour
             if (Vector3.Distance(transform.position, JumpingPoint.position) > 1)
             {
                 animation.Play("PlayerKos");
-                transform.position = Vector3.Lerp(transform.position, JumpingPoint.position, 0.03f);
+                GameObject.Find("CameraPosition").transform.eulerAngles = new Vector3(0, 90, 0);
+                transform.DORotate(new Vector3(0, 0, 0), 0.5f);
+                transform.DOMove(JumpingPoint.position, 2.5f);
             }
             else
             {
                 isReachedJumpingPoint = true;
-                Physics.gravity = new Vector3(0, -2, 0);
+                Physics.gravity = new Vector3(0, -1, 0);
                 gameObject.GetComponent<Rigidbody>().isKinematic = false;
-                GetComponent<Rigidbody>().AddForce(new Vector3(5, 5, 0), ForceMode.Impulse);
+                GetComponent<Rigidbody>().AddForce(new Vector3(7.5f, 7.5f, 0), ForceMode.Impulse);
 
                 Gm.anim.clip = Gm.clips[5];
                 Gm.anim.Play();
 
-                JumpingPoint = GameObject.Find("paractueBut").transform;
-                Image trans = JumpingPoint.GetComponent<Image>();
-
-                Color c = trans.color;
-                c.a = 1;
-                trans.color = c;
-                StartCoroutine(paraschutWait());
-               
+                StartCoroutine(OpenParachute());
             }
         } 
     }
+
+    IEnumerator OpenParachute()
+    {
+        yield return new WaitForSeconds(0.5f);
+        Parachute.SetActive(true);
+        GameObject.Find("MainCamera").GetComponent<SmoothFollow>().distance = 20;
+        GetComponent<TrailRenderer>().enabled = false;
+    }
+
+
+
     int x=10;
     private void FixedUpdate()
     {
@@ -97,30 +103,44 @@ public class PlayerScript : MonoBehaviour
 
     public void paractueButton()
     {
-        if (isReachedJumpingPoint==true)
-        {
-            Debug.Log("jump işlemi");
-            Time.timeScale = 1;
-            parashut.SetActive(true);
-
-            jumpControl = true;
-            GameObject parasütButton = GameObject.Find("paractueBut");
-            parasütButton.SetActive(false);
-          
-        }
+      
     }
  
-    private void OnCollisionEnter(Collision collision)
+  
+
+
+    private void OnTriggerEnter(Collider other)
     {
-        if (collision.collider.tag == "PuanTablo")
+        if (other.tag == "PuanTablo")
         {
-             print("skk");
             Gm.anim.Stop();
             Gm.anim.clip = Gm.clips[3];
             Gm.anim.Play();
             Invoke("Gulme", 2f);
+            if (other.name == "PuanGroundKırmızı")
+            {
+
+            }
+            else if (other.name == "PuanGroundPembe")
+            {
+
+            }
+            else if (other.name == "PuanGroundMor")
+            {
+
+            }
+            else if (other.name == "PuanGroundTurkuaz")
+            {
+
+            }
+            else if (other.name == "PuanGroundYesil")
+            {
+
+            }
         }
     }
+
+
     public void Gulme()
     {
         print("Gülme hareketi başladı");
