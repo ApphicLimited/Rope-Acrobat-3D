@@ -284,7 +284,7 @@ public class SlingShotMouse : MonoBehaviour
         }
         else if(other.collider.tag == "Player")
         {
-           
+            print("Kosuyor");
             Gm.anim.Stop();
             Gm.anim.clip = Gm.clips[4];
             Gm.anim.Play();

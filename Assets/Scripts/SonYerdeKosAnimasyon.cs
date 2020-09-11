@@ -20,14 +20,14 @@ public class SonYerdeKosAnimasyon : MonoBehaviour
     }
     private void Update()
     {
-        getir();
+       // getir();
     }
-        void OnCollisionEnter(Collision collision)
+     /*   void OnCollisionEnter(Collision collision)
         {
-            print("hello    " + collision.collider.tag);
+            
             if (collision.collider.tag == "Player")
             {
-
+            print("Sa");
                 Gm.anim.Stop();
                 Gm.anim.clip = Gm.clips[4];
                 Gm.anim.Play();
@@ -38,7 +38,7 @@ public class SonYerdeKosAnimasyon : MonoBehaviour
                 
                 
             }
-        } 
+        } */
 
     /* private void on(Collider collision)
      {
@@ -63,7 +63,7 @@ public class SonYerdeKosAnimasyon : MonoBehaviour
         NereyeKadar = 0;
     }
     
-    void getir()
+   /* void getir()
     {
         if (Gm.ensonasama)
         {
@@ -82,7 +82,7 @@ public class SonYerdeKosAnimasyon : MonoBehaviour
                 }
 
             }
-        }
+        }*/
         /*
         if (Input.GetMouseButtonDown(0))
         {
@@ -128,4 +128,4 @@ public class SonYerdeKosAnimasyon : MonoBehaviour
     }
 
 
-}
+

@@ -11,13 +11,14 @@ public class PlayerScript : MonoBehaviour
     public Transform JumpingPoint;
     public Transform StartingPoint;
     public Animation animation;
+    public bool state = false;
     public GameObject cube;
     public GameObject Parachute;
     private float screenCenterX;
     // Start is called before the first frame update
     void Start()
     {
-       // PlayerPrefs.DeleteAll();
+        // PlayerPrefs.DeleteAll();
 
         Gm = FindObjectOfType<GameManager>();
 
@@ -30,7 +31,7 @@ public class PlayerScript : MonoBehaviour
 
     IEnumerator JumpingPointSet()
     {
-      
+
         yield return new WaitForSeconds(2);
         JumpingPoint = GameObject.Find("JumpingPoint").transform;
         StartingPoint = GameObject.Find("StartingPoint").transform;
@@ -43,38 +44,49 @@ public class PlayerScript : MonoBehaviour
         {
             if (Vector3.Distance(transform.position, JumpingPoint.position) > 1)
             {
-                animation.Play("PlayerKos");
-                GameObject.Find("CameraPosition").transform.eulerAngles = new Vector3(0, 90, 0);
-                transform.DORotate(new Vector3(0, 180, 0), 0.5f);
-                transform.DOMove(JumpingPoint.position, 2.5f);
-            }
-            else
-            {
-                isReachedJumpingPoint = true;
-                Physics.gravity = new Vector3(0, -1, 0);
-               gameObject.GetComponent<Rigidbody>().isKinematic = false;
-                GetComponent<Rigidbody>().AddForce(new Vector3(7.5f, 7.5f, 0), ForceMode.Impulse);
-                jumpControl = true;
-                Gm.anim.clip = Gm.clips[5];
-              Gm.anim.Play();
+                if (!state)
+                {
+                    state = true;
 
-                StartCoroutine(OpenParachute());
+                    animation.Play("PlayerKos");
+
+                    Invoke("Gulme", 1f);
+                    Invoke("Level", 3f);
+
+                    GameObject.Find("CameraPosition").transform.eulerAngles = new Vector3(0, 90, 0);
+                    transform.DORotate(new Vector3(0, 180, 0), 0.5f);
+
+                }
+
+                // transform.DOMove(JumpingPoint.position, 2.5f);
             }
-        } 
+            /*  else
+              {
+                  isReachedJumpingPoint = true;
+                  Physics.gravity = new Vector3(0, -1, 0);
+                 gameObject.GetComponent<Rigidbody>().isKinematic = false;
+                  GetComponent<Rigidbody>().AddForce(new Vector3(7.5f, 7.5f, 0), ForceMode.Impulse);
+                  jumpControl = true;
+              /*    Gm.anim.clip = Gm.clips[5];
+                Gm.anim.Play();*/
+
+            // StartCoroutine(OpenParachute());
+
+        }
     }
 
-    IEnumerator OpenParachute()
+    /*IEnumerator OpenParachute()
     {
         yield return new WaitForSeconds(2.5f);
         Parachute.SetActive(true);
         GameObject.Find("MainCamera").GetComponent<SmoothFollow>().distance = 20;
         GetComponent<TrailRenderer>().enabled = false;
     }
+    /*
 
 
-
-    int x=10;
-    private void FixedUpdate()
+   // int x=10;
+   /* private void FixedUpdate()
     {
         if (jumpControl == true)
         {
@@ -95,25 +107,29 @@ public class PlayerScript : MonoBehaviour
             }
 
         }
-    }
+    }*/
     private bool jumpControl;
-    public  bool animationControl;
-    IEnumerator paraschutWait()
+    public bool animationControl;
+    /*  IEnumerator paraschutWait()
+      {
+          yield return new WaitForSeconds(2f);
+          Time.timeScale = 0;
+      }*/
+
+    /* public void paractueButton()
+     {
+
+     }
+
+
+     private bool planeControl=true;
+
+
+     */
+     public  void Level()
     {
-        yield return new WaitForSeconds(2f);
-        Time.timeScale = 0;
+        Gm.CompleteLevel();
     }
-
-    public void paractueButton()
-    {
-      
-    }
-
-
-    private bool planeControl=true;
-
-  
-
 
     public void Gulme()
     {
@@ -121,7 +137,7 @@ public class PlayerScript : MonoBehaviour
         Gm.anim.Stop();
         Gm.anim.clip = Gm.clips[6];
         Gm.anim.Play();
-       animationControl = true;
-       
+
+
     }
 }
