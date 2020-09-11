@@ -5,9 +5,9 @@ using UnityEngine;
 public class SonYerdeKosAnimasyon : MonoBehaviour
 {
     public GameManager Gm;
-     
     public Rigidbody rb;
-    
+    public float horizontalMoveSpeed = 30f;
+    public float horizontalmove = 0;
     Vector2 currentSwipe;
     Vector2 firstPressPos;
     Vector2 secondPressPos;
@@ -21,21 +21,24 @@ public class SonYerdeKosAnimasyon : MonoBehaviour
     private void Update()
     {
         getir();
-
+    }
         void OnCollisionEnter(Collision collision)
         {
-            print("sa    " + collision.collider.tag);
+            print("hello    " + collision.collider.tag);
             if (collision.collider.tag == "Player")
             {
 
                 Gm.anim.Stop();
                 Gm.anim.clip = Gm.clips[4];
                 Gm.anim.Play();
+            print("kosmaya basladi");
                 collision.transform.position = Vector3.Lerp(collision.transform.position, new Vector3(0, 16f, 1.05f), 3f);
-                rb.AddForce(0, 0, 200 * Time.deltaTime);
+            print("addforce veriliyor ");
+            rb.AddForce(0, 0, 200 * Time.deltaTime);
+                
                 
             }
-        } }
+        } 
 
     /* private void on(Collider collision)
      {
@@ -59,27 +62,26 @@ public class SonYerdeKosAnimasyon : MonoBehaviour
         Nerede = "ortada";
         NereyeKadar = 0;
     }
-    PlayerScript ps = new PlayerScript();
+    
     void getir()
     {
-
-     /*   if (Input.GetMouseButton(0))
+        if (Gm.ensonasama)
         {
-            if (ps.JumpingPoint)
+            if (Input.GetMouseButton(0))
             {
                 if (Input.mousePosition.x > Screen.width / 2)
                 {
-                    GetComponent<Rigidbody>().AddForce(new Vector3(0, 0, .5f), ForceMode.Impulse);
+                    transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z- 0.5f);
+                    print("Sag tarafa tiklandi");
 
                 }
                 else
                 {
-                    GetComponent<Rigidbody>().AddForce(new Vector3(0, 0, -.5f), ForceMode.Impulse);
+                    transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z + 0.5f);
+                    print("Sol tarafa tiklandi");
                 }
 
-            }    */
-           
-            
+            }
         }
         /*
         if (Input.GetMouseButtonDown(0))
@@ -126,4 +128,4 @@ public class SonYerdeKosAnimasyon : MonoBehaviour
     }
 
 
-
+}
